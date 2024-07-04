@@ -1,8 +1,31 @@
 import com.algorithms.*;
+
+import java.util.Scanner;
+
 public class Main{
+    public Jobs[] instantiateArrivalAndBurstTime(int noOfProcesses){
+        Jobs[] jobArray = new Jobs[noOfProcesses];
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Arrival Time and Burst Time for each process");
+        for(int i=0; i<noOfProcesses; i++){
+            jobArray[i] = new Jobs();
+            jobArray[i].name = "P" + Integer.toString(i+1);
+            System.out.print(jobArray[i].name+" : ");
+            jobArray[i].arrivalTime = sc.nextInt();
+            jobArray[i].burstTime = sc.nextInt();
+            sc.nextLine();
+        }
+        sc.close();
+        return jobArray;
+    }
+
     public static void main(String[] args) {
-        FCFS algo = new FCFS(5);
-        algo.instantiateArrivalAndBurstTime();
-        algo.printJobs();
+        int noOfProcesses = 4;
+        Jobs[] jobArray = new Main().instantiateArrivalAndBurstTime(noOfProcesses);
+        FCFS fcfs_algo = new FCFS(noOfProcesses, jobArray);
+        fcfs_algo.printJobs();
+
+        NonPreemptiveSJF nonPreemptiveSJFScheduler = new NonPreemptiveSJF(noOfProcesses, jobArray);
+        nonPreemptiveSJFScheduler.printJobs();
     }
 }

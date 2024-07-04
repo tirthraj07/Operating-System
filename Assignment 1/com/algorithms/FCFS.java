@@ -1,6 +1,8 @@
 package com.algorithms;
 
-import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Comparator;
+
 
 /*
 First Come First Serve – CPU Scheduling (Non-Preemptive)
@@ -13,54 +15,35 @@ public class FCFS {
     private int noOfProcesses;
     private Jobs[] jobArray;
 
-    public FCFS(int noOfProcesses){
+    public FCFS(int noOfProcesses, Jobs[] v){
         this.noOfProcesses = noOfProcesses;
         jobArray = new Jobs[noOfProcesses];
         for(int i=0; i<noOfProcesses; i++){
-            jobArray[i] = new Jobs();
-            jobArray[i].name = "P" + Integer.toString(i+1);
+            jobArray[i] = new Jobs(v[i]);
         }
-        
-    } 
-
-    public void instantiateArrivalAndBurstTime(){
-        System.out.println("Enter Arrival Time and Burst Time for each process");
-        Scanner sc = new Scanner(System.in);
-        for(int i=0; i<noOfProcesses; i++){
-            System.out.print(jobArray[i].name+" : ");
-            jobArray[i].arrivalTime = sc.nextInt();
-            jobArray[i].burstTime = sc.nextInt();
-            sc.nextLine();
-        }
-        sc.close();
         sortJobArray();
         calculateWaitingTime();
     }
 
     private void sortJobArray(){
-        boolean swapped;
-        for(int i=0; i<noOfProcesses-1; i++){
-            swapped = false;
-            for(int j=0; j<noOfProcesses-i-1; j++){
-                if(jobArray[i].arrivalTime > jobArray[i+1].arrivalTime){
-                    Jobs temp = jobArray[i];
-                    jobArray[i] = jobArray[i+1];
-                    jobArray[i+1] = temp;
-                    swapped = true;
-                }
-            }
-            if(swapped == false){
-                break;
-            }
-        }
+        Arrays.sort(jobArray, Comparator.comparingInt(job -> job.arrivalTime));
     }
 
     public void calculateWaitingTime(){
         jobArray[0].waitingTime = 0;
-        for(int i=1; i<noOfProcesses; i++){
-            Jobs curr = jobArray[i];
-            Jobs prev = jobArray[i-1];
-            curr.waitingTime = (prev.arrivalTime + prev.burstTime + prev.waitingTime) - curr.arrivalTime;
+        jobArray[0].completionTime = jobArray[0].arrivalTime + jobArray[0].burstTime;
+        jobArray[0].turnaroundTime = jobArray[0].completionTime - jobArray[0].arrivalTime;
+        if(noOfProcesses > 1) {
+            Jobs curr = jobArray[1], prev = jobArray[0];
+            for (int i = 1; i < noOfProcesses; i++) {
+                curr = jobArray[i];
+                prev = jobArray[i - 1];
+                prev.completionTime = prev.arrivalTime + prev.waitingTime + prev.burstTime;
+                prev.turnaroundTime = prev.completionTime - prev.burstTime;
+                curr.waitingTime = prev.completionTime - curr.arrivalTime;
+            }
+            curr.completionTime = curr.arrivalTime + curr.waitingTime + curr.burstTime;
+            curr.turnaroundTime = curr.completionTime - curr.arrivalTime;
         }
     }
 
@@ -74,7 +57,8 @@ public class FCFS {
     }
 
     public void printJobs(){
-        System.out.println("Process Name \t\t Arrival Time \t\t Burst Time \t\t Waiting Time");
+        System.out.println("Non - Preemptive First Come First Serve Algorithm");
+        System.out.println("Process Name Arrival Time Burst Time Waiting Time Turnaround Time Completion Time");
         for(int i=0; i<noOfProcesses; i++){
             System.out.println(jobArray[i]);
         }
