@@ -20,12 +20,11 @@ public class Main{
             jobArray[i].burstTime = sc.nextInt();
             sc.nextLine();
         }
-        sc.close();
         return jobArray;
     }
 
     public static void main(String[] args) {
-        int noOfProcesses = 5;
+        int noOfProcesses = 7;
         Jobs[] jobArray = new Main().instantiateArrivalAndBurstTime(noOfProcesses);
         FCFS fcfs_algo = new FCFS(noOfProcesses, jobArray);
         fcfs_algo.printJobs();
@@ -35,6 +34,9 @@ public class Main{
 
         PreemptiveSJF preemptiveSJFScheduler = new PreemptiveSJF(noOfProcesses, jobArray);
         preemptiveSJFScheduler.printJobs();
+
+        NonPreemptivePriorityScheduling nonPreemptivePriorityScheduler = new NonPreemptivePriorityScheduling(noOfProcesses, jobArray);
+        nonPreemptivePriorityScheduler.printJobs();
 
     }
 }
