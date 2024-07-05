@@ -8,6 +8,8 @@ public class Jobs{
     public int burstTime;
     public int turnaroundTime;
     public int completionTime;
+    public int remainingBurstTime;
+    public int priority;
 
     public Jobs(){};
 
@@ -18,10 +20,12 @@ public class Jobs{
         this.burstTime = cpy.burstTime;
         this.turnaroundTime = cpy.turnaroundTime;
         this.completionTime = cpy.completionTime;
+        this.remainingBurstTime = cpy.remainingBurstTime;
+        this.priority = cpy.priority;
     }
 
     @Override
     public String toString(){
-        return this.name + "\t\t\t\t" + this.arrivalTime + "\t\t\t\t" + this.burstTime + "\t\t\t\t" + this.waitingTime + "\t\t\t\t" + this.turnaroundTime + "\t\t\t\t" + this.completionTime;
+        return this.name + "\t\t\t" + this.priority + "\t\t\t" + this.arrivalTime + "\t\t\t" + this.burstTime + "\t\t\t" + this.waitingTime + "\t\t\t\t" + this.turnaroundTime + "\t\t\t\t" + this.completionTime;
     }
 }

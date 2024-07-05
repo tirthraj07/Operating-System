@@ -2,6 +2,11 @@ import com.algorithms.*;
 
 import java.util.Scanner;
 
+/*
+Write a program to simulate CPU Scheduling Algorithms: FCFS, SJF (Preemptive),
+Priority (Non-Preemptive) and Round Robin (Preemptive). 
+*/
+
 public class Main{
     public Jobs[] instantiateArrivalAndBurstTime(int noOfProcesses){
         Jobs[] jobArray = new Jobs[noOfProcesses];
@@ -20,12 +25,16 @@ public class Main{
     }
 
     public static void main(String[] args) {
-        int noOfProcesses = 4;
+        int noOfProcesses = 5;
         Jobs[] jobArray = new Main().instantiateArrivalAndBurstTime(noOfProcesses);
         FCFS fcfs_algo = new FCFS(noOfProcesses, jobArray);
         fcfs_algo.printJobs();
 
         NonPreemptiveSJF nonPreemptiveSJFScheduler = new NonPreemptiveSJF(noOfProcesses, jobArray);
         nonPreemptiveSJFScheduler.printJobs();
+
+        PreemptiveSJF preemptiveSJFScheduler = new PreemptiveSJF(noOfProcesses, jobArray);
+        preemptiveSJFScheduler.printJobs();
+
     }
 }

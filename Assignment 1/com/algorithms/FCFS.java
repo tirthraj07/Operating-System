@@ -58,7 +58,7 @@ public class FCFS {
 
     public void printJobs(){
         System.out.println("Non - Preemptive First Come First Serve Algorithm");
-        System.out.println("Process Name Arrival Time Burst Time Waiting Time Turnaround Time Completion Time");
+        System.out.println("Process Name Priority Arrival Time Burst Time Waiting Time Turnaround Time Completion Time");
         for(int i=0; i<noOfProcesses; i++){
             System.out.println(jobArray[i]);
         }
