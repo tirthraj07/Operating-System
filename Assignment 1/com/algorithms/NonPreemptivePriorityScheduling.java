@@ -27,7 +27,6 @@ public class NonPreemptivePriorityScheduling {
             jobArray[i].priority = sc.nextInt();
             sc.nextLine();
         }
-        sc.close();
     }
 
     private void sortJobsBasedOnArrivalTimeAndPriority() {

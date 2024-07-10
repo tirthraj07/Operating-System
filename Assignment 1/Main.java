@@ -29,14 +29,17 @@ public class Main{
         FCFS fcfs_algo = new FCFS(noOfProcesses, jobArray);
         fcfs_algo.printJobs();
 
-        NonPreemptiveSJF nonPreemptiveSJFScheduler = new NonPreemptiveSJF(noOfProcesses, jobArray);
-        nonPreemptiveSJFScheduler.printJobs();
+//        NonPreemptiveSJF nonPreemptiveSJFScheduler = new NonPreemptiveSJF(noOfProcesses, jobArray);
+//        nonPreemptiveSJFScheduler.printJobs();
 
         PreemptiveSJF preemptiveSJFScheduler = new PreemptiveSJF(noOfProcesses, jobArray);
         preemptiveSJFScheduler.printJobs();
 
         NonPreemptivePriorityScheduling nonPreemptivePriorityScheduler = new NonPreemptivePriorityScheduling(noOfProcesses, jobArray);
         nonPreemptivePriorityScheduler.printJobs();
+
+        RoundRobinScheduling roundRobinScheduler = new RoundRobinScheduling(noOfProcesses, jobArray);
+        roundRobinScheduler.printJobs();
 
     }
 }
