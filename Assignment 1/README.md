@@ -6,6 +6,8 @@ javac Assembler.java
 java Assember <file-name>
 ```
 
+![Working](assignment-working.png)
+
 ### Test case 1
 ```powershell
 java Assembler testcase1.asm
