@@ -1,7 +1,8 @@
 package src.pass1.structures;
 
 import java.util.*;
-import src.pass1.utils.helper.*;;
+import src.pass1.utils.helper.*;
+import src.pass2.structures.APT;;
 
 public class MDT {
     public static ArrayList<String> MacroDefinitionTable;
@@ -34,6 +35,37 @@ public class MDT {
         }
         System.out.println("\n");
 
+    }
+
+
+    // pass 2 requirement
+
+    public static ArrayList<String> getMacroBody(APT apt, int MDTP) throws Exception{
+        ArrayList<String> body = new ArrayList<>();
+
+        while(MDTP < MacroDefinitionTable.size() && !MacroDefinitionTable.get(MDTP).equalsIgnoreCase("MEND")){
+            String outputLine = "";
+            String line = MacroDefinitionTable.get(MDTP);
+
+            String[] tokenizedLine = line.split("\\s+");
+            for(String token: tokenizedLine){
+                if(token.startsWith("(") && token.endsWith(")")){
+                    int position = Integer.parseInt(token.substring(3, token.length()-1));
+                    int index = position - 1;
+                    String parameter = PNT.ParameterNameTable.get(index);
+                    String argument = apt.get(parameter);
+                    outputLine = outputLine + argument + " ";
+                }
+                else{
+                    outputLine = outputLine + token + " ";
+                }
+            }
+            outputLine = outputLine.trim();
+            body.add(outputLine);
+            MDTP++;
+        }
+
+        return body;
     }
 
 }
