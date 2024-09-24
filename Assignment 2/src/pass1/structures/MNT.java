@@ -10,9 +10,9 @@ public class MNT{
         MacroNameTable = new ArrayList<>();
     }
 
-    public static MNTRow geMntRow(String name) throws Exception {
+    public static MNTRow geMntRow(String name, int pp, int kp) throws Exception {
         for(MNTRow row: MacroNameTable){
-            if(row.name.equalsIgnoreCase(name)) return row;
+            if(row.name.equalsIgnoreCase(name) && row.pp==pp && row.kp==kp) return row;
         }
         throw new Exception("Error: Macro Name : " + name + " not found in MNT" );
     }
@@ -20,7 +20,7 @@ public class MNT{
     public static MNTRow insertIntoMNT(String name, int pp, int kp) throws Exception {
         Boolean isPresent = true;
         try{
-            geMntRow(name);
+            geMntRow(name, pp, kp);
         }
         catch(Exception e){
             isPresent = false;

@@ -25,12 +25,13 @@ import src.pass1.utils.helper.MacroDefinitionTokenType;
 public class pass1{
     
     public Path fileName;
+    ArrayList<String> outputLines;
 
     public pass1(Path fileName) throws Exception{
         this.fileName = fileName;
         List<String> lines;
 
-        ArrayList<String> outputLines = new ArrayList<>();
+        outputLines = new ArrayList<>();
         try{
             lines = FileReader.readFile(fileName);
         }
@@ -84,6 +85,10 @@ public class pass1{
         System.out.println("\n");
 
         System.out.println("-- END OF PASS 1 --");
+    }
+
+    public ArrayList<String> getOutput(){
+        return outputLines;
     }
 
     // Insert data into MNT, PNT, KPDT

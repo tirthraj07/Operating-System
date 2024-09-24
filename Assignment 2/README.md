@@ -144,3 +144,61 @@ M2 100 200 &V=AREG &U=BREG
 
 -- END OF PASS 1 --
 ```
+
+## Testcase 3
+
+```bash
+java -cp target src.Macroprocessor testcase3.asm
+```
+
+## Testcase 3 output
+
+```
+--- PASS 1 Completed ---
+-- Macro Name Table (MNT) --
+name    : pp : kp : MDTP : PNTP : KPDTP
+M1      : 2  : 2  : 0    : 0    : 0
+M1      : 3  : 2  : 5    : 4    : 2
+
+
+-- Parameter Name Table (PNT) --
+position : parameter
+1 : &X
+2 : &Y
+3 : &B
+4 : &A
+5 : &P
+6 : &Q
+7 : &R
+8 : &U
+9 : &V
+
+
+-- Keyword Parameter Default Table --
+parameter  :  default argument
+&B :  __
+&A : AREG
+&V : DREG
+&U : CREG
+
+
+-- Macro Definition Table --
+MOVER (P,4) (P,1)
+ADD (P,4) ='1'
+MOVER (P,3) (P,2)
+ADD (P,4) ='5'
+MEND
+MOVER (P,8) (P,5)
+MOVER (P,9) (P,6)
+ADD (P,8) ='15'
+ADD (P,9) ='10'
+MEND
+
+
+PASS 1 Output :
+M1 10 20 &B=CREG
+M1 100 200 300 &V=AREG &U=BREG
+
+
+-- END OF PASS 1 --
+```
