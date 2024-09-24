@@ -7,40 +7,45 @@
 
 ### Working of Pass 2
 
-Take input from pass1 which will only contain the asm code with macro calls and non-macro calls
-Start reading the input till you get to the macro call
-If line is not a macro call then just copy the line as it is
-
+Take input from pass1 which will only contain the asm code with macro calls and non-macro calls  
+Start reading the input till you get to the macro call  
+If line is not a macro call then just copy the line as it is  
+  
 If line is a macro call, then do further analysis
-
-How would one identify a macro call?
+  
+__How would one identify a macro call?__  
 Split the line with space as delimiter
 Then if the 0th index is inside the MNT, then identify that line as MACRO CALL
 
-What analysis should i do?
-Firstly, tokenize the macro call
-0th index -> MACRO NAME
-if the word have '=' symbol -> keyword parameter (increment kp) else positional parameter (increment pp)
+__What analysis should i do?__  
+Firstly, tokenize the macro call  
+0th index -> MACRO NAME  
+if the word have '=' symbol -> keyword parameter (increment kp) else positional parameter (increment pp)  
+  
+At the end, you'll get __MACRO name, pp, kp and totalParameterCount__ and also the __positional parameter list and keyword parameter list__  
 
-At the end, you'll get MACRO name, pp, kp and totalParameterCount and also the positional parameter list and keyword parameter list
-Check for MACRO definition having the same name and pp first
-Then check kp
-if current kp > MNT kp, then wrong MACRO definition
-if current kp <= MNT kp, then analyze the given keyword parameters
-check if all keyword parameters without default values have been supplied or not. If not then wrong MACRO definition
-check if rest of the keyword parameters are there in PNT. If not then wrong MACRO definition
-create APT for the currentMacroCall
+Check for MACRO definition having the same name and pp first  
+Then check kp  
+if current kp > MNT kp, then __wrong MACRO definition__  
+if current kp <= MNT kp, then analyze the given keyword parameters  
+check if all keyword parameters without default values have been supplied or not. __If not then wrong MACRO definition__  
+check if rest of the keyword parameters are there in PNT. __If not then wrong MACRO definition__  
 
-Start reading the MDT using MDTP from MNT and until you find 'MEND'
-Tokenize each line
-Check if the word starts and ends with ( and ) respectively
+__create APT for the Current Macro Call__
+
+Start reading the MDT using MDTP from MNT and __until you find 'MEND'__  
+Tokenize each line  
+Check if the word starts and ends with '(' and ')' respectively    
+  
 Since the start of Parameter Reference is always the same i.e (P,pos)
-if n if the length of (P,pos) then get the number from String 3 to n-2 both inclusive
-Search the parameter index in PNT and get back the parameter
-Search the parameter in APT and get back the actual value
-Replace it in the output line
-Do this for Rest of the line
-Repeat the entire process for next line
+if n if the length of (P,pos) then get the number from String 3 to n-2 both inclusive  
+
+Search the parameter index in PNT and get back the parameter  
+Search the parameter in APT and get back the actual value  
+Replace it in the output line  
+Do this for Rest of the line  
+
+__Repeat the entire process for next line__
 
 
 ### Folder Structure
