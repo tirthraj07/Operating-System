@@ -1,0 +1,8 @@
+MACRO
+M1 &X &Y &A=AREG &B=
+MOVER &A &X
+ADD &A ='1'
+MOVER &B &Y
+ADD &A ='5'
+MEND
+M1 10 20 &B=CREG
