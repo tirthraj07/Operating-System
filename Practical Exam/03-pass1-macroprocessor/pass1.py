@@ -102,7 +102,7 @@ def substitute_index_notations_for_arguments(line_tokens: list[str]) -> str:
                 if PNT[i] == token:
                     operand_position = i+1
                     break
-            macro_line += f"(P, {operand_position}) "
+            macro_line += f"(P,{operand_position}) "
         else:
             macro_line += token + " "
 
