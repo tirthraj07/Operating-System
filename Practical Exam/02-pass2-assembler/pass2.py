@@ -1,14 +1,38 @@
+'''
+This is a simplified version of pass 2 without any error detection.
+
+Note that each testcase folder must have following text files named exactly as below
+- symbol_table.txt
+- literal_table.txt
+- pool_table.txt
+- intermediate_code.txt
+
+Each entry in each files MUST be in SPACE SEPARATED FORMAT
+
+Start Reading the code from def main() to understand the flow :)
+
+'''
+
 # file locations
 ic_location: str = ""
 symbol_table_location: str = ""
 literal_table_location: str = ""
 pool_table_location: str = ""
 
+# [ [symbol, location_counter] ]
 symbol_table : list[list[str, int]] = []
+
+# [ [symbol, location_counter] ]
 literal_table : list[list[str, int]] = []
+
+# [ "#1", "#2", .. ]
 pool_table : list[str] = []
-location_counter = 0
+
+# [ [ "(AD,01)", "(C,100)" ] ]
 ic_code : list[list[str]] = []
+
+location_counter = 0
+
 
 # output storage
 output_code: list[str] = []

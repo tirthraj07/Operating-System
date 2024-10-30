@@ -192,7 +192,7 @@ def get_symbol_location_counter(symbol:str) -> int:
     
     return -1
 
-def create_new_pool() -> int:
+def create_new_pool():
     global location_counter
     # fetch the current pool
     current_pool = pool_table[len(pool_table)-1]
