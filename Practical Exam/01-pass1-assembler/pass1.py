@@ -122,7 +122,7 @@ def tokenize_line(card: list[str]) -> tuple[str, str, str, str]:
 # if location parameter is not given then and forward ref = False, then assign the current location_counter value
 def insert_in_symbol_table(symbol: str, forward_ref:bool, location=None):
     if forward_ref:
-        # check if the (symbol,current_pool) already exists. If not, then insert new one
+        # check if the symbol already exists. If not, then insert new one
         for i in range(0, len(symbol_table)):
             if symbol_table[i][0] == symbol:
                 return
