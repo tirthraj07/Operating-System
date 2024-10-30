@@ -22,7 +22,7 @@ pool_table_location: str = ""
 # [ [symbol, location_counter] ]
 symbol_table : list[list[str, int]] = []
 
-# [ [symbol, location_counter] ]
+# [ [literal, location_counter] ]
 literal_table : list[list[str, int]] = []
 
 # [ "#1", "#2", .. ]
