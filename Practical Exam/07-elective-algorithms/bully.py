@@ -2,6 +2,27 @@
 Refer to README.md for understanding the Bully Algorithm
 
 Note: Higher the priority number, higher is the priority
+
+
+def main() -> Entry point to the algorithm
+
+This is a SIMULATION of the leader election algorithm. In real world case, you'd run n number of processes in parallel
+
+Here we use random module to simulate the message receiving at different times
+
+First we select the leader based on priority
+
+Then we fail the leader on purpose of simulation
+
+Then we pick a random active process to start the simulation
+
+Then we send the election message
+
+Then we randomize the received messages to simulate that different processes reply at different times
+
+If we get a okay message then it recursively calls the start_simulation function
+
+Else new leader gets elected and sends the coordination message
 '''
 from time import sleep, time
 import random

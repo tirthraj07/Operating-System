@@ -31,7 +31,8 @@ If no higher-priority node responds, the initiating node assumes leadership.
 
 - __Notification__: The newly elected leader informs all nodes of its leadership status, ensuring consistency across the distributed system.
 
-Here is a working diagram of Bully Election Algorithm
+Here is a working diagram of Bully Election Algorithm  
+
 ![bully-election-algorithm](public/bully_algorithm.png)
 
 
@@ -54,7 +55,7 @@ How it works
 
 - If it happens to be the highest priority process currently running, it will win the election and take over the coordinator's job
 
-Thus __Biggest guy__ always wind and hence named __Bully Algorithm__
+Thus __Biggest guy__ always wins and hence named __Bully Algorithm__
   
   
 Input
