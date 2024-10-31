@@ -159,3 +159,140 @@ Process 6 replied: New Coordinator Set: Process 8
 Process 7 replied: New Coordinator Set: Process 8
 --- END ---
 ```
+
+
+
+## Ring Algorithm
+The Ring Election Algorithm is a method used in distributed systems to elect a leader among a group of interconnected nodes arranged in a ring-like structure. It ensures that only one node in the network becomes the leader, facilitating coordination and decision-making within the system.
+
+How Does Ring Election Algorithm Work?
+
+Below is how the ring election algorithm works:
+
+- When any process notices that the co-ordinator is not functioning, it builds an ELECTION message containing its own process number and sends the message to its successor. 
+
+- If the successor is down, the sender skips over the successor and goes to the next member
+along the ring, or the one after that until a running process is located. At each step, the sender adds its own process number to the list in the message effectively making itself a candidate to be elected as co-ordinator. 
+
+- Eventually, the message gets back to the process that started it all. That process recognizes
+this event when it receives an incoming message containing its own process number. 
+
+- At that point, the message type is changed to CO-ORDINATOR and circulated once again, this time to inform everyone else who the co-ordinator is and who the members of the new ring are. When which message has circulated once, it is removed and everyone goes back to
+work
+
+![ring-election-algorithm](public/ring-algorithm.png)
+
+- If two processes, say 2 and 5 discover simultaneously that the previous co-ordinator, process 7 has crashed. Each of these builds an ELECTION message and each of them starts circulating its message, independent of the other one.
+
+- Both messages will go all the way around, and both 2 and 5 will convert them into CO-ORDINATOR messages with exactly the same number and in the same order. 
+
+- When both have gone around again, both will be removed. It does not harm to have extra message circulating at worst it consumes a little bandwidth, but this not considered wasteful. 
+
+
+Input
+```
+Enter no. of processes: 10
+Enter Priority for Process 0 (Default 0) : 
+Is Process 0 active? (T/F) (Default T) : 
+Enter Priority for Process 1 (Default 1) : 
+Is Process 1 active? (T/F) (Default T) : 
+Enter Priority for Process 2 (Default 2) : 
+Is Process 2 active? (T/F) (Default T) : 
+Enter Priority for Process 3 (Default 3) : 
+Is Process 3 active? (T/F) (Default T) : 
+Enter Priority for Process 4 (Default 4) : 
+Is Process 4 active? (T/F) (Default T) : 
+Enter Priority for Process 5 (Default 5) : 
+Is Process 5 active? (T/F) (Default T) : 
+Enter Priority for Process 6 (Default 6) :
+Is Process 6 active? (T/F) (Default T) :
+Enter Priority for Process 7 (Default 7) :
+Is Process 7 active? (T/F) (Default T) :
+Enter Priority for Process 8 (Default 8) :
+Is Process 8 active? (T/F) (Default T) :
+Enter Priority for Process 9 (Default 9) :
+Is Process 9 active? (T/F) (Default T) :
+```
+
+Output
+```
+--- RING ELECTION ALGORITHM ---
+Leader: Process 9 with Priority 9
+
+Leader Process failed
+
+Selecting Random Process to initiate
+Selected Process 7 with Priority 7
+
+Starting simulation with process: 7
+
+Process 7 circulating election message
+Sending election message to process 8
+
+Process 8 received election message
+Candidate List : [ Process 7 , ]
+Sending election message to process 0
+
+Process 0 received election message
+Candidate List : [ Process 7 , Process 8 , ]
+Sending election message to process 1
+
+Process 1 received election message
+Candidate List : [ Process 7 , Process 8 , Process 0 , ]
+Sending election message to process 2
+
+Process 2 received election message
+Candidate List : [ Process 7 , Process 8 , Process 0 , Process 1 , ]
+Sending election message to process 3
+
+Process 3 received election message
+Candidate List : [ Process 7 , Process 8 , Process 0 , Process 1 , Process 2 , ]
+Sending election message to process 4
+
+Process 4 received election message
+Candidate List : [ Process 7 , Process 8 , Process 0 , Process 1 , Process 2 , Process 3 , ]
+Sending election message to process 5
+
+Process 5 received election message
+Candidate List : [ Process 7 , Process 8 , Process 0 , Process 1 , Process 2 , Process 3 , Process 4 , ]
+Sending election message to process 6
+
+Process 6 received election message
+Candidate List : [ Process 7 , Process 8 , Process 0 , Process 1 , Process 2 , Process 3 , Process 4 , Process 5 , ]
+Sending election message to process 7
+
+Process 7 received back the election message
+
+
+Process 7 initiating coordinator message circulation
+Sending Process 8 coordinator message
+
+Process 8 received coordinator message: Process 8 is new coordinator
+Sending Process 0 coordinator message
+
+Process 0 received coordinator message: Process 8 is new coordinator
+Sending Process 1 coordinator message
+
+Process 1 received coordinator message: Process 8 is new coordinator
+Sending Process 2 coordinator message
+
+Process 2 received coordinator message: Process 8 is new coordinator
+Sending Process 3 coordinator message
+
+Process 3 received coordinator message: Process 8 is new coordinator
+Sending Process 4 coordinator message
+
+Process 4 received coordinator message: Process 8 is new coordinator
+Sending Process 5 coordinator message
+
+Process 5 received coordinator message: Process 8 is new coordinator
+Sending Process 6 coordinator message
+
+Process 6 received coordinator message: Process 8 is new coordinator
+Sending Process 7 coordinator message
+
+Process 7 received back the coordinator message
+
+Ending Process
+
+```
