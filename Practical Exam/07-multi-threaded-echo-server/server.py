@@ -1,33 +1,44 @@
-import socket
+from socket import *
 import threading
 
-HOST = '127.0.0.1'
-PORT = 8000
 
+HOST: str = "127.0.0.1"
+PORT: int = 3000
 
-def handle_client(client_socket:socket.socket):
+def log(prefix: str, message: str):
+    print(f"[{prefix}]\t\t{message}")
+
+def handle_client(clientSocket: socket):
     while True:
-        data = client_socket.recv(1024)
+        data:bytes = clientSocket.recv(1024)
         if not data:
             break
-        print(f"Message Received from client : {data.decode()}")
-        client_socket.send(data)
-    client_socket.close()    
+        log("INFO", f"Message received from client : {data.decode()}")
+        clientSocket.send(data)
+    clientSocket.close()
 
-def main():
-    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_socket.bind((HOST, PORT))
-    server_socket.listen(5)
-    print(f"Server Listening on {HOST}:{PORT}")
-
-    while True:
+def main() -> None:
+    serverSocket = socket(AF_INET, SOCK_STREAM)
+    serverSocket.bind((HOST, PORT))
+    serverSocket.listen(10)
+    log("INFO", f"Server Listening on {HOST}:{PORT}")
+    while(True):
         try:
-            client_socket, addr = server_socket.accept()
-            print(f'Accepted connection from {addr[0]}:{addr[1]}')
-            client_thread = threading.Thread(target=handle_client, args=(client_socket,))
+            clientSocket, client_addr = serverSocket.accept()
+            log("INFO", f"Client Connected : {client_addr[0]}:{client_addr[1]}")
+            client_thread = threading.Thread(target=handle_client, args=(clientSocket,))
             client_thread.start()
-        except:
+
+        except KeyboardInterrupt:
+            log("LOG", "Server Shutting Down...")
+            break
+        except Exception as e:
+            log("ERROR", "error occurred")
+            print(e)
             break
 
-if __name__ == '__main__':
+    serverSocket.close()    
+
+
+if __name__ == "__main__":
     main()
