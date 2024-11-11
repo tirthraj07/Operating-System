@@ -1,5 +1,0 @@
-Write a program to simulate CPU Scheduling Algorithms:
-FCFS
-SJF (Preemptive)
-Priority (Non-Preemptive)
-Round Robin (Preemptive)

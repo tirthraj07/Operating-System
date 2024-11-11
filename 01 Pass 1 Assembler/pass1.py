@@ -1,5 +1,13 @@
 '''
-def main() is the start of the program
+This is a simplified version of pass 1 assembler compared to one I did during our lab sessions
+Does't contain syntax and sematic analysis and error detection and is built on TRUST that the input provided is valid else you wouldn't know where or which error has occurred. (Happy DEBUGGING :) )
+But probably what they expect during practical exams due to time constraints
+
+Reduced the code from ~700 lines (Java version) to ~400 lines (this version). Thank you python :)
+
+Refer to the flowchart in the folder for more information about the program
+
+def main() -> Entry Point to the program. Start there and follow the flowchart. You'll understand the code then easily
 '''
 
 optab : dict[tuple[str, int]] = {
