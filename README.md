@@ -1,4 +1,4 @@
-### Laboratory 1 : System Programming and Operating Systems + Distributed Systems
+### Laboratory Practice 1 : System Programming and Operating Systems + Distributed Systems
 
 This repo contains the assignments during Laboratory Practice - 1 : (SPOS + DS) 
 
