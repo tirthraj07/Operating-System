@@ -96,4 +96,4 @@ Simulation of election algorithms (Ring and Bully).
 
 --- 
 Note:
-I highly recommended to perform the practicals in python during examination due to time constraints
+I highly recommend to perform the practicals in Python during examination due to time constraints
